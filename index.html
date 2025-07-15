@@ -160,18 +160,37 @@
       color: #666;
       margin-top: 0.5rem;
     }
-    /* Mobile scroll-down indicator styles */
+    /* Fixed scroll-down indicator for mobile, only if calendar overflows */
     .scroll-down-indicator {
       display: none;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      outline: none;
+    }
+    .scroll-down-indicator:active svg,
+    .scroll-down-indicator:focus svg {
+      filter: brightness(0.8);
     }
     @media (max-width: 900px) {
       .scroll-down-indicator {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 18px;
+        z-index: 100;
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 0.5rem;
+        pointer-events: none;
         animation: bounce 1.3s infinite;
         opacity: 0.7;
+        transition: opacity 0.3s;
+      }
+      .scroll-down-indicator.hide {
+        opacity: 0;
+        pointer-events: none;
       }
       @keyframes bounce {
         0%, 100% { transform: translateY(0); }
@@ -198,9 +217,9 @@
         aria-label="Google Calendar of Youth Activities"
       ></iframe>
       <!-- Mobile scroll-down indicator -->
-      <div class="scroll-down-indicator" aria-hidden="true">
+      <button class="scroll-down-indicator" aria-label="Scroll down to WhatsApp links section">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
+      </button>
     </section>
     <aside class="links-section" aria-label="WhatsApp Group Links">
       <h2>Join Our Warm Springs Ward WhatsApp Youth Activity Discussions</h2>
@@ -219,5 +238,51 @@
       </div>
     </aside>
   </main>
+  <script>
+    // Show scroll-down indicator only if calendar overflows viewport, and hide after scroll
+    (function() {
+      function updateScrollIndicator() {
+        var indicator = document.querySelector('.scroll-down-indicator');
+        var calendarSection = document.querySelector('.calendar-section');
+        if (!indicator || !calendarSection) return;
+        // Only run on mobile
+        if (window.innerWidth > 900) {
+          indicator.style.display = 'none';
+          return;
+        }
+        // Get calendar section bottom relative to viewport
+        var rect = calendarSection.getBoundingClientRect();
+        // If calendar is taller than viewport (overflows below fold)
+        if (rect.bottom > window.innerHeight + 10) {
+          indicator.style.display = 'flex';
+        } else {
+          indicator.style.display = 'none';
+        }
+        // Hide indicator if user has scrolled past the calendar
+        var scrolledPast = window.scrollY + 60 > calendarSection.offsetTop + calendarSection.offsetHeight;
+        if (scrolledPast) {
+          indicator.classList.add('hide');
+        } else {
+          indicator.classList.remove('hide');
+        }
+      }
+      window.addEventListener('scroll', updateScrollIndicator);
+      window.addEventListener('resize', updateScrollIndicator);
+      document.addEventListener('DOMContentLoaded', updateScrollIndicator);
+      setTimeout(updateScrollIndicator, 500); // In case of late layout
+
+      // Scroll to WhatsApp links section on indicator click
+      document.addEventListener('DOMContentLoaded', function() {
+        var indicator = document.querySelector('.scroll-down-indicator');
+        var linksSection = document.querySelector('.links-section');
+        if (indicator && linksSection) {
+          indicator.addEventListener('click', function(e) {
+            e.preventDefault();
+            linksSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
