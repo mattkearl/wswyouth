@@ -160,6 +160,24 @@
       color: #666;
       margin-top: 0.5rem;
     }
+    /* Mobile scroll-down indicator styles */
+    .scroll-down-indicator {
+      display: none;
+    }
+    @media (max-width: 900px) {
+      .scroll-down-indicator {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 0.5rem;
+        animation: bounce 1.3s infinite;
+        opacity: 0.7;
+      }
+      @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(10px); }
+      }
+    }
   </style>
 </head>
 <body>
@@ -179,6 +197,10 @@
         title="Warm Springs Ward Youth Activities Calendar"
         aria-label="Google Calendar of Youth Activities"
       ></iframe>
+      <!-- Mobile scroll-down indicator -->
+      <div class="scroll-down-indicator" aria-hidden="true">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
     </section>
     <aside class="links-section" aria-label="WhatsApp Group Links">
       <h2>Join Our Warm Springs Ward WhatsApp Youth Activity Discussions</h2>
