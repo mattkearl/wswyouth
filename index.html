@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Warm Springs Ward Youth Activities</title>
+  <!-- Google Fonts: Roboto -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-bg: #fafbfc;
+      --card-bg: #fff;
+      --accent: #f4511e;
+      --text: #222;
+      --border: #e0e0e0;
+      --radius: 12px;
+      --shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background: var(--primary-bg);
+      color: var(--text);
+    }
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      text-align: center;
+      padding: 2rem 1rem 1rem 1rem;
+      font-size: 2rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    .container {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto 2rem auto;
+      padding: 0 1rem;
+    }
+    .calendar-section, .links-section {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    .calendar-section {
+      flex: 2;
+      min-width: 0;
+      align-items: center;
+    }
+    .links-section {
+      flex: 1;
+      min-width: 260px;
+      max-width: 400px;
+      gap: 1.5rem;
+    }
+    .links-section h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    .group-card {
+      background: var(--primary-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+      transition: box-shadow 0.2s;
+    }
+    .group-card:hover, .group-card:focus-within {
+      box-shadow: 0 4px 16px rgba(244,81,30,0.08);
+      border-color: var(--accent);
+    }
+    .group-title {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
+    .group-desc {
+      font-size: 0.97rem;
+      color: #444;
+      margin-bottom: 0.5rem;
+    }
+    .group-link {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      padding: 0.6em 1.2em;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: background 0.15s;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+    .group-link:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .group-link:hover {
+      background: #d63b0f;
+    }
+    /* Responsive styles */
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .calendar-section, .links-section {
+        max-width: 100%;
+      }
+    }
+    @media (max-width: 600px) {
+      header {
+        font-size: 1.3rem;
+        padding: 1.2rem 0.5rem 0.5rem 0.5rem;
+      }
+      .calendar-section, .links-section {
+        padding: 1rem 0.5rem;
+      }
+      .group-link {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Warm Springs Ward Youth Activities
+  </header>
+  <main class="container" aria-label="Main content">
+    <section class="calendar-section" aria-label="Upcoming Activities Calendar">
+      <!-- Google Calendar Embed -->
+      <iframe
+        src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FDenver&showTz=0&src=d3N3eW91dGhAZ21haWwuY29t&src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23f4511e&color=%23616161"
+        style="border-width:0; width:100%; min-width:260px; max-width:800px; height:600px;"
+        width="100%"
+        height="600"
+        frameborder="0"
+        scrolling="no"
+        title="Warm Springs Ward Youth Activities Calendar"
+        aria-label="Google Calendar of Youth Activities"
+      ></iframe>
+    </section>
+    <aside class="links-section" aria-label="WhatsApp Group Links">
+      <h2>Join a WhatsApp Group</h2>
+      <!-- WhatsApp Group Card Example -->
+      <div class="group-card" tabindex="0" aria-label="Warm Springs Ward Young Men Discussion Group">
+        <div class="group-title">Warm Springs Ward Young Men Discussion</div>
+        <div class="group-desc">Join this group to stay updated on activities, events, and discussions for the Young Men of the Warm Springs Ward.</div>
+        <a class="group-link" href="https://chat.whatsapp.com/C9MWUfL3Soh7s9WvtzEAWN" target="_blank" rel="noopener noreferrer" aria-label="Join Warm Springs Ward Young Men WhatsApp Group">Join Group</a>
+      </div>
+      <!--
+        To add more groups, copy the .group-card div above and update the title, description, and link.
+      -->
+    </aside>
+  </main>
+</body>
+</html>
